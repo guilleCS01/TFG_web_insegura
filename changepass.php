@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['loggedin'])) {
-    header("Location: login.php"); // Redirigir a login si no esta login
+    header("Location: login.php"); 
     exit();
 }
 $mysqli = new mysqli("localhost", "root", "password", "web_users");
@@ -12,20 +12,19 @@ if ($mysqli->connect_error) {
 
 if (isset($_GET['id'])) {
     $userId = $_GET['id'];
-    // Verifica que el ID de la url es el del usuario 
+
     if ($userId != $_SESSION['id']) {
         header("Location: login.php");
         exit();
     }
 } else {
-    echo "User ID not provided.";
+    echo "User's ID was not provided.";
     exit();
 }
 
 if (isset($_GET['changePassword'])) {
     $newPassword = sha1($_GET['newPassword']);
 
-    // Cambio de contraseña con el $UserId
     $stmt = $mysqli->prepare("UPDATE users SET password = ? WHERE id = ?");
     $stmt->bind_param("si", $newPassword, $userId);
     $stmt->execute();

@@ -3,48 +3,45 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 if (isset($_POST['register'])) {    
     
-
-    // Connect to the database
     $HOST = 'localhost';
     $USER = 'root';
     $PASS = 'password';
     $NAME = 'web_users';
     $conexion = new mysqli($HOST, $USER, $PASS, $NAME);
 
-    // Check for errors
+
     if ($conexion->connect_error) {
-        die("Fallo de conexion con la base de datos: " . $conexion->connect_error);
+        die("There has been an error in the connection to the database try again later " . $mysqli->connect_error);
     }
 
-    // Check if the username already exists
+
     $username = $_POST['username'];
     $check = $conexion->prepare("SELECT username FROM users WHERE username = ?");
     $check->bind_param("s", $username);
     $check->execute();
     $check->store_result();
 
-    // If the username already exists, display an error message
+
     if ($check->num_rows > 0) {
         $_SESSION['error'] = "Username is arleady taken";
     } else {
-        // Prepare and bind the SQL statement for inserting a new user
-        //$password = $_POST['password'];
+
         $password = sha1($_POST['password']);
         $insertStmt = $conexion->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
         $insertStmt->bind_param("ss", $username, $password);
 
-        // Execute the SQL statement
+
         if ($insertStmt->execute()) {
             $_SESSION['success'] = "Account successfully created!";
         } else {
             echo "Error: " . $insertStmt->error;
         }
 
-        // Close the connection
+
         $insertStmt->close();
     }
 
-    // Close the connection for the username check
+
     $check->close();
     $conexion->close();
 }

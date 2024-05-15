@@ -1,5 +1,5 @@
 <?php
-// Iniciar sesión para verificar si el usuario está autenticado
+
 session_start();
 
 $mysqli = new mysqli("localhost", "root", "password", "web_users");
@@ -8,9 +8,9 @@ if ($mysqli->connect_error) {
     die("There has been an error in the connection to the database try again later " . $mysqli->connect_error);
 }
 $username = '';
-// Obtener el nombre de usuario de la URL si está presente
+
 if (isset($_GET['id'])) {
-    // Obtener el ID de usuario de la URL
+
     $userId = $_GET['id'];
     
     
@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
     $stmt->execute();
     $stmt->store_result();
     
-    // Verificar si se encontró un resultado
+
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($username);
         $stmt->fetch();
@@ -42,18 +42,18 @@ if (isset($_GET['id'])) {
         <h1>Debate Forum</h1>
     </header>
     <div class="pregunta">
-        <h2><b>Let us know you opinion about the 2023 climate summit</b></h2>
-        <a href="https://www.consilium.europa.eu/en/meetings/international-summit/2023/12/01-02/">Reference</a>
+        <h2><b>Let us know you opinion about the 2024 climate summit</b></h2>
+        <a href="https://www.theclimategroup.org/us-climate-action-summit-2024">Reference</a>
     </div>
     <div id="messages">
         <?php include 'getMessages.php'; ?>
     </div>
 
-    <?php if(isset($_GET['id']) ) { ?> <!-- Verificar si se proporcionaron los parámetros de ID  -->
+    <?php if(isset($_GET['id']) ) { ?> 
     <div id="messageForm">
         <form>
             <div>
-                <?php if(isset($_GET['id']) ) { ?> <!-- Verificar si el usuario está autenticado -->
+                <?php if(isset($_GET['id']) ) { ?> 
                     <label for="name">Name: <?php echo $username; ?></label>
                     <input type="hidden" id="name" value="<?php echo $username; ?>">
                 <?php } else { ?>

@@ -20,13 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_data'])) {
     $direccion = $_POST['dir'];
     $correo = $_POST['correo'];
 
-    // Verifica si se ha subido un archivo
+
     if (isset($_FILES["file"])) {
         $image_file = $apellidos . $_FILES["file"]["name"] ;
         $locate = "data/" . $image_file;
         if ($nombre != "" AND $apellidos != "" AND $direccion != "" AND $correo != ""){
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $locate)) {
-            // Ahora, procesa los datos en la base de datos
+
             
                 $insertStmt = $conexion->prepare("INSERT INTO afiliados (dni, nombre, apellidos, direccion, correo) VALUES (?, ?, ?, ?, ?)");
                 $insertStmt->bind_param("sssss",$image_file, $nombre, $apellidos, $direccion, $correo);

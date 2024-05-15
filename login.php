@@ -20,12 +20,11 @@ if (isset($_POST['login'])) {
     $stmt->execute();
     $stmt->store_result();
 
-    // Comprueba si existe el usuario
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($id, $pass);
         $stmt->fetch();
 
-        if (sha1($password) == $pass) { // Comparación directa con la contraseña
+        if (sha1($password) == $pass) { 
             $_SESSION['loggedin'] = true;
             $_SESSION['id'] = $id;
             $_SESSION['username'] = $username;
@@ -41,8 +40,6 @@ if (isset($_POST['login'])) {
     $stmt->close();
     $connect->close();
 }
-
-
 
 ?>
 
@@ -62,7 +59,7 @@ if (isset($_POST['login'])) {
     <div id="login-form-wrap">
         <h2>Login</h2>
         <?php
-        // Los mensajes de error si existen
+
         if (isset($_SESSION['error'])) {
             echo '<i><p style="color:red;">' . $_SESSION['error'] . '</p></i>';
             unset($_SESSION['error']); // Borrar el mensaje

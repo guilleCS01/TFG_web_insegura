@@ -32,12 +32,11 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-// Logout functionality
+
 if (isset($_POST['logout'])) {
-    // Unset las variables de sesion
+
     $_SESSION = array();
 
-    // Destruir la sesion
     session_destroy();
 
     header("Location: login.php");

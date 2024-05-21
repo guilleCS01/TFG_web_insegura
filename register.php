@@ -15,7 +15,7 @@ if (isset($_POST['register'])) {
     }
 
 
-    $username = $_POST['username'];
+    $username = strtolower($_POST['username']);
     $check = $conexion->prepare("SELECT username FROM users WHERE username = ?");
     $check->bind_param("s", $username);
     $check->execute();

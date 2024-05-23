@@ -25,10 +25,14 @@ if (isset($_POST['register'])) {
     if ($check->num_rows > 0) {
         $_SESSION['error'] = "Username is arleady taken";
     } else {
-
+	
+	$result = $conexion->query("SELECT MAX(id) as max_id FROM users");
+	$row = $result->fetch_assoc();	
+	$newId = $row['max_id'] ? $row['max_id'] + 1 : 1;
+	
         $password = sha1($_POST['password']);
-        $insertStmt = $conexion->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-        $insertStmt->bind_param("ss", $username, $password);
+        $insertStmt = $conexion->prepare("INSERT INTO users (id, username, password) VALUES (?, ?, ?)");
+        $insertStmt->bind_param("iss",$newId, $username, $password);
 
 
         if ($insertStmt->execute()) {

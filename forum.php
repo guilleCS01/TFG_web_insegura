@@ -71,7 +71,7 @@ if (isset($_GET['id'])) {
             <button type="button" onclick="postMessage()">Send</button>
         </form>
         </div>
-    <?php } else { ?> <!-- Si no se proporcionan los parámetros de ID , mostrar un mensaje para iniciar sesion -->
+    <?php } else { ?> 
         <p style="text-align: center; color: red; font-style: italic;">You must login in the platform to be able to write in the forum.</p>
 
     <?php } ?>
@@ -94,14 +94,14 @@ if (isset($_GET['id'])) {
             xhr.send();
         }
 
-        // Funcion para enviar nuevos mensajes
+
         function postMessage() {
-            var name = '<?php echo $username; ?>'; // Obtener el nombre de usuario
+            var name = '<?php echo $username; ?>'; 
             var message = document.getElementById('message').value;
             var errorMessagesDiv = document.getElementById('errorMessages');
-            errorMessagesDiv.innerHTML = ''; // Limpiar mensajes de error anteriores
+            errorMessagesDiv.innerHTML = ''; 
 
-            // Verificar si el mensaje está vacio
+
 
             if (message) {
                 var xhr = new XMLHttpRequest();
@@ -122,7 +122,7 @@ if (isset($_GET['id'])) {
             }
         }
 
-        // Enseñar los mensajes en la pagina
+
         displayMessages();
     </script>
 </body>
